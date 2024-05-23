@@ -59,129 +59,132 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: SafeArea(
-        maintainBottomViewPadding: true,
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/splash.jpg'),
-                fit: BoxFit.cover
-              )
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10,),
-                const Padding(
-                   padding: EdgeInsets.only(left: 15.0),
-                   child: Text(
-                    "List of Recipes",
-                    style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        fontFamily: AppFonts.primaryFont
-                    ),
-                             ),
-                 ),
-                Expanded(
-                  child: SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 15,left: 15),
-                      child: Obx(() =>
-                         ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.only(top: 10),
-                          itemCount: homeController.data.length,
-                            itemBuilder: (context,index){
-                            var items = homeController.data.value[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppColors.teritary,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: SizedBox(
-                                        height: 45,
-                                        child:  Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(100),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: items.image.toString(),
-                                                  errorWidget: (context, url, error) =>
-                                                  const Icon(Icons.error),
-                                                  width: 40,
-                                                  height: 40,),
-                                              )
-                                            ),
-                                             Padding(
-                                              padding: const EdgeInsets.only(left: 18.0),
-                                              child: Text(
-                                                items.name.toString(),
-                                                style: const TextStyle(
-                                                    color: AppColors.blackColor,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 16,
-                                                    fontFamily: AppFonts.primaryFont
+      body: PopScope(
+        canPop: false,
+        child: SafeArea(
+          maintainBottomViewPadding: true,
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/splash.jpg'),
+                  fit: BoxFit.cover
+                )
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10,),
+                  const Padding(
+                     padding: EdgeInsets.only(left: 15.0),
+                     child: Text(
+                      "List of Recipes",
+                      style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          fontFamily: AppFonts.primaryFont
+                      ),
+                               ),
+                   ),
+                  Expanded(
+                    child: SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 15,left: 15),
+                        child: Obx(() =>
+                           ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.only(top: 10),
+                            itemCount: homeController.data.length,
+                              itemBuilder: (context,index){
+                              var items = homeController.data.value[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Container(
+                                  height: 50,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppColors.teritary,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        child: SizedBox(
+                                          height: 45,
+                                          child:  Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(100),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: items.image.toString(),
+                                                    errorWidget: (context, url, error) =>
+                                                    const Icon(Icons.error),
+                                                    width: 40,
+                                                    height: 40,),
+                                                )
+                                              ),
+                                               Padding(
+                                                padding: const EdgeInsets.only(left: 18.0),
+                                                child: Text(
+                                                  items.name.toString(),
+                                                  style: const TextStyle(
+                                                      color: AppColors.blackColor,
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 16,
+                                                      fontFamily: AppFonts.primaryFont
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                     Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        items.cuisine.toString(),
-                                        style: const TextStyle(
-                                            color: AppColors.blackColor,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14,
-                                            fontFamily: AppFonts.primaryFont
+                                       Padding(
+                                        padding: const EdgeInsets.only(right: 10.0),
+                                        child: Text(
+                                          items.cuisine.toString(),
+                                          style: const TextStyle(
+                                              color: AppColors.blackColor,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                              fontFamily: AppFonts.primaryFont
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ),
-                            );
-                          }
+                                    ],
+                                  )
+                                ),
+                              );
+                            }
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-               const Padding(
-                  padding: EdgeInsets.only(left: 15.0,top: 15),
-                  child: Text(
-                    "Your Favorites",
-                    style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        fontFamily: AppFonts.primaryFont
+                 const Padding(
+                    padding: EdgeInsets.only(left: 15.0,top: 15),
+                    child: Text(
+                      "Your Favorites",
+                      style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          fontFamily: AppFonts.primaryFont
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 200,
-                    child: gridItems()),
-                const SizedBox(height: 30,)
-              ],
+                  SizedBox(
+                    height: 200,
+                      child: gridItems()),
+                  const SizedBox(height: 30,)
+                ],
+              ),
             ),
           ),
         ),
